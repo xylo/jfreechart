@@ -152,7 +152,9 @@ public class ChartViewer extends Control implements Skinnable,
         ParamChecks.nullNotPermitted(chart, "chart");
         this.chart = chart;
         ChartViewerSkin skin = (ChartViewerSkin) getSkin();
-        skin.setChart(chart);
+        if (skin != null) {
+            skin.setChart(chart);
+        }
     }
  
     /**
