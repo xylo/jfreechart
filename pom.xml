@@ -141,7 +141,7 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <excludes>
                         <exclude>org/jfree/chart/demo/**</exclude>
-                        <exclude>org/jfree/chart/fx/**</exclude>
+                        <exclude>org/jfree/chart/fx/demo/**</exclude>
                     </excludes>                
                 </configuration>
             </plugin>
