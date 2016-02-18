@@ -230,25 +230,27 @@ public class ZoomHandlerFX extends AbstractMouseHandlerFX {
                     w = Math.min(w, maxX - this.startPoint.getX());
                     h = Math.min(h, maxY - this.startPoint.getY());
                 }
-                Rectangle2D zoomArea = new Rectangle2D.Double(x, y, w, h);
-                
-                boolean saved = p.isNotify();
-                p.setNotify(false);
-                double pw0 = percentW(x, dataArea);
-                double pw1 = percentW(x + w, dataArea);
-                double ph0 = percentH(y, dataArea);
-                double ph1 = percentH(y + h, dataArea);
-                PlotRenderingInfo info 
+
+                if (h >= 5 || w >= 5) {
+                    Rectangle2D zoomArea = new Rectangle2D.Double(x, y, w, h);
+
+                    boolean saved = p.isNotify();
+                    p.setNotify(false);
+                    double pw0 = percentW(x, dataArea);
+                    double pw1 = percentW(x + w, dataArea);
+                    double ph0 = percentH(y, dataArea);
+                    double ph1 = percentH(y + h, dataArea);
+                    PlotRenderingInfo info
                         = this.viewer.getRenderingInfo().getPlotInfo();
-                if (z.getOrientation().isVertical()) {
-                    z.zoomDomainAxes(pw0, pw1, info, endPoint);
-                    z.zoomRangeAxes(1 - ph1, 1 - ph0, info, endPoint);
-                } else {
-                    z.zoomRangeAxes(pw0, pw1, info, endPoint);
-                    z.zoomDomainAxes(1 - ph1, 1 - ph0, info, endPoint);
+                    if (z.getOrientation().isVertical()) {
+                        z.zoomDomainAxes(pw0, pw1, info, endPoint);
+                        z.zoomRangeAxes(1 - ph1, 1 - ph0, info, endPoint);
+                    } else {
+                        z.zoomRangeAxes(pw0, pw1, info, endPoint);
+                        z.zoomDomainAxes(1 - ph1, 1 - ph0, info, endPoint);
+                    }
+                    p.setNotify(saved);
                 }
-                p.setNotify(saved);
-                
             }
         }
         viewer.hideZoomRectangle();
