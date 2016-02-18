@@ -63,7 +63,7 @@ public class ScrollHandlerFX extends AbstractMouseHandlerFX
         implements MouseHandlerFX {
 
     /** The zoom factor. */
-    private double zoomFactor = 0.1;
+    private double zoomFactor = 1.2;
     
     /**
      * Creates a new instance with the specified ID.
@@ -72,7 +72,6 @@ public class ScrollHandlerFX extends AbstractMouseHandlerFX
      */
     public ScrollHandlerFX(String id) {
         super(id, false, false, false, false);
-        this.zoomFactor = 0.1;
     };
 
     /**
@@ -126,8 +125,8 @@ public class ScrollHandlerFX extends AbstractMouseHandlerFX
             boolean notifyState = plot.isNotify();
             plot.setNotify(false);
             int clicks = (int) e.getDeltaY();
-            double zf = 1.0 + this.zoomFactor;
-            if (clicks < 0) {
+            double zf = this.zoomFactor;
+            if (clicks > 0) {
                 zf = 1.0 / zf;
             }
             if (true) { //this.chartPanel.isDomainZoomable()) {
